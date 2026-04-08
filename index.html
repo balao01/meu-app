@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Boleira Organizada</title>
+  </head>
   <body>
-    <h1>🔥 FUNCIONANDO AGORA!</h1>
+    <h1>🍰 Boleira Organizada</h1>
+
+    <input placeholder="Nome do cliente" id="nome" />
+    <br /><br />
+
+    <input placeholder="Pedido" id="pedido" />
+    <br /><br />
+
+    <button onclick="salvar()">Salvar Pedido</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+      function salvar() {
+        const nome = document.getElementById("nome").value;
+        const pedido = document.getElementById("pedido").value;
+
+        const item = document.createElement("li");
+        item.innerText = nome + " - " + pedido;
+
+        document.getElementById("lista").appendChild(item);
+      }
+    </script>
   </body>
 </html>
