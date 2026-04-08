@@ -1,44 +1,65 @@
-<script>
-  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Boleira Organizada</title>
+  </head>
+  <body>
+    <h1>🍰 Boleira Organizada</h1>
 
-  function renderizar() {
-    const lista = document.getElementById("lista");
-    lista.innerHTML = "";
+    <input placeholder="Nome do cliente" id="nome" />
+    <br /><br />
 
-    pedidos.forEach((p, index) => {
-      const item = document.createElement("li");
+    <input placeholder="Pedido" id="pedido" />
+    <br /><br />
 
-      const texto = document.createElement("span");
-      texto.innerText = p;
+    <button onclick="salvar()">Salvar Pedido</button>
 
-      const botao = document.createElement("button");
-      botao.innerText = "❌";
-      botao.onclick = () => excluir(index);
+    <ul id="lista"></ul>
 
-      item.appendChild(texto);
-      item.appendChild(botao);
+    <script>
+      let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-      lista.appendChild(item);
-    });
-  }
+      function renderizar() {
+        const lista = document.getElementById("lista");
+        lista.innerHTML = "";
 
-  function salvar() {
-    const nome = document.getElementById("nome").value;
-    const pedido = document.getElementById("pedido").value;
+        pedidos.forEach((p, index) => {
+          const item = document.createElement("li");
 
-    const novo = nome + " - " + pedido;
+          const texto = document.createElement("span");
+          texto.innerText = p;
 
-    pedidos.push(novo);
-    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+          const botao = document.createElement("button");
+          botao.innerText = " ❌ ";
+          botao.onclick = () => excluir(index);
 
-    renderizar();
-  }
+          item.appendChild(texto);
+          item.appendChild(botao);
 
-  function excluir(index) {
-    pedidos.splice(index, 1);
-    localStorage.setItem("pedidos", JSON.stringify(pedidos));
-    renderizar();
-  }
+          lista.appendChild(item);
+        });
+      }
 
-  renderizar();
-</script>
+      function salvar() {
+        const nome = document.getElementById("nome").value;
+        const pedido = document.getElementById("pedido").value;
+
+        const novo = nome + " - " + pedido;
+
+        pedidos.push(novo);
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+        renderizar();
+      }
+
+      function excluir(index) {
+        pedidos.splice(index, 1);
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+        renderizar();
+      }
+
+      renderizar();
+    </script>
+  </body>
+</html>
