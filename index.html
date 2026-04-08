@@ -1,49 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Boleira Organizada</title>
-  </head>
-  <body>
-    <h1>🍰 Boleira Organizada</h1>
+<script>
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-    <input placeholder="Nome do cliente" id="nome" />
-    <br /><br />
+  function renderizar() {
+    const lista = document.getElementById("lista");
+    lista.innerHTML = "";
 
-    <input placeholder="Pedido" id="pedido" />
-    <br /><br />
+    pedidos.forEach((p, index) => {
+      const item = document.createElement("li");
 
-    <button onclick="salvar()">Salvar Pedido</button>
+      const texto = document.createElement("span");
+      texto.innerText = p;
 
-    <ul id="lista"></ul>
+      const botao = document.createElement("button");
+      botao.innerText = "❌";
+      botao.onclick = () => excluir(index);
 
-    <script>
-      let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+      item.appendChild(texto);
+      item.appendChild(botao);
 
-      function renderizar() {
-        const lista = document.getElementById("lista");
-        lista.innerHTML = "";
+      lista.appendChild(item);
+    });
+  }
 
-        pedidos.forEach((p) => {
-          const item = document.createElement("li");
-          item.innerText = p;
-          lista.appendChild(item);
-        });
-      }
+  function salvar() {
+    const nome = document.getElementById("nome").value;
+    const pedido = document.getElementById("pedido").value;
 
-      function salvar() {
-        const nome = document.getElementById("nome").value;
-        const pedido = document.getElementById("pedido").value;
+    const novo = nome + " - " + pedido;
 
-        const novo = nome + " - " + pedido;
+    pedidos.push(novo);
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
-        pedidos.push(novo);
-        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+    renderizar();
+  }
 
-        renderizar();
-      }
+  function excluir(index) {
+    pedidos.splice(index, 1);
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+    renderizar();
+  }
 
-      renderizar();
-    </script>
-  </body>
-</html>
+  renderizar();
+</script>
