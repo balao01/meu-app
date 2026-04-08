@@ -18,15 +18,32 @@
     <ul id="lista"></ul>
 
     <script>
+      let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+      function renderizar() {
+        const lista = document.getElementById("lista");
+        lista.innerHTML = "";
+
+        pedidos.forEach((p) => {
+          const item = document.createElement("li");
+          item.innerText = p;
+          lista.appendChild(item);
+        });
+      }
+
       function salvar() {
         const nome = document.getElementById("nome").value;
         const pedido = document.getElementById("pedido").value;
 
-        const item = document.createElement("li");
-        item.innerText = nome + " - " + pedido;
+        const novo = nome + " - " + pedido;
 
-        document.getElementById("lista").appendChild(item);
+        pedidos.push(novo);
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+        renderizar();
       }
+
+      renderizar();
     </script>
   </body>
 </html>
