@@ -3,12 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <title>Boleira Organizada</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        background: #fff0f5;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #d63384;
+      }
+
+      input {
+        padding: 10px;
+        width: 80%;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        background: #ff69b4;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        background: white;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      li button {
+        background: red;
+        border-radius: 5px;
+      }
+    </style>
   </head>
+
   <body>
     <h1>🍰 Boleira Organizada</h1>
 
     <input placeholder="Nome do cliente" id="nome" />
-    <br /><br />
+    <br />
 
     <input placeholder="Pedido" id="pedido" />
     <br /><br />
@@ -31,7 +82,7 @@
           texto.innerText = p;
 
           const botao = document.createElement("button");
-          botao.innerText = " ❌ ";
+          botao.innerText = "❌";
           botao.onclick = () => excluir(index);
 
           item.appendChild(texto);
